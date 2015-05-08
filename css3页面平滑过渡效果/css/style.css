@@ -1,0 +1,100 @@
+body{
+	font-family: Georgia,serif;
+	background: #ddd;
+	font-weight: 400;
+	font-size: 15px;
+	color: #333;
+	overflow: hidden;
+	-webkit-font-smoothing:antialiased;
+}
+a {
+	text-decoration: none;
+	color:#555;
+}
+.clr {
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	clear: both;
+	padding: 0;
+	margin:0;
+}
+.st-container {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.st-container > input, .st-container > a {
+	width: 20%;
+	height: 34px;
+	line-height: 34px;
+	/*固定在窗体底部*/
+	position: fixed;
+	bottom: 0;
+}
+
+/*隐藏input*/
+.st-container > input {
+	/*display: none;不占位*/
+	/*visibility: hidden;占位*/
+	opacity: 0;
+	z-index: 1000;
+}
+
+.st-container > a {
+	z-index: 10;
+	font-weight: 700;
+	font-size: 16px;
+	background: #e23a6e;
+	text-align: center;
+	color: #fff;
+	text-align: 1px 1px 1px rgba(151, 24, 64, 0.2);
+}
+
+#st-control-1, #st-control-1 + a {
+	left: 0%;
+}
+
+#st-control-2, #st-control-2 + a {
+	left: 20%;
+}
+
+#st-control-3, #st-control-3 + a {
+	left: 40%;
+}
+
+#st-control-4, #st-control-4 + a {
+	left: 60%;
+}
+
+#st-control-5, #st-control-5 + a {
+	left: 80%;
+}
+
+/*通过被选中input单选按钮来设置紧跟其后a的样式*/
+.st-container input:checked + a ,
+.st-container input:checked:hover + a {/*当鼠标滑过时，被选中的input后的a的背景颜色保持不变*/
+	background: #821134;
+}
+
+/*生成三角*/
+.st-container input:checked + a:after {
+	content: "";
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	border: 20px solid transparent;
+	border-bottom-color: #821134;
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -20px;
+}
+
+/*设置鼠标滑过样式*/
+.st-container input:hover + a {
+	background: #AD244f;
+}
