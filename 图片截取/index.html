@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		html, body{
+			padding: 0;
+			margin: 0;
+		}
+
+		#box{
+			width: 300px;
+			height: 300px;
+			border: 1px solid white;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin-left: -150px;
+			margin-top: -150px;
+			z-index: 2;
+		}
+
+		.topcenter{
+			width: 8px;
+			height: 8px;
+			position: absolute;
+			background: #fff;
+			left: 50%;
+			margin-left: -4px;
+			margin-top: -4px;
+		}
+		.bottomcenter{
+			width: 8px;
+			height: 8px;
+			position: absolute;
+			background: #fff;
+			left: 50%;
+			top:100%;
+			margin-left: -4px;
+			margin-top: -4px;
+		}
+
+		.clip img{
+			width: 400px;
+			height: 400px;
+			position: absolute;
+			margin-left: -200px;
+			margin-top: -200px;
+			left: 50%;
+			top:50%;
+			z-index: 1;
+		}
+	</style>
+	<script type="text/javascript">
+		var ifKeyDown = false;
+		// var topcenter =    document.getElementsByClassName('topcenter')[0];
+		// var bottomcenter = document.getElementsByClassName('bottomcenter')[0];
+		// var contact = 'topcenter';
+		/**
+		 *获取当前元素相对屏蔽左边的距离, 利用offsetLeft属性
+		 */
+		function getPosition(node) {
+			var left = node.offsetLeft;
+			var top = node.offsetTop;
+			var parent = node.offsetParent;
+			while(parent != null) { // 判断当前元素有没有父元素
+				left += parent.offsetLeft;
+				top += parent.offsetTop;
+				parent = node.offsetParent; //重新给父元素赋值，确保递归的将当前元素的所有父元素都遍历出来，
+			}
+			return {'left': top, 'top': top};
+		}
+
+		window.onmousedown = function() {
+			ifKeyDown = true;
+		};
+
+		window.onmouseup = function() {
+			ifKeyDown = false;
+		};
+
+		// topcenter.onmousedown = function() {
+		// 	contact = 'topcenter';
+		// };
+		// bottomcenter.onmousedown = function() {
+		// 	contact = 'bottomcenter';
+		// };
+
+		window.onmousemove = function(e) {
+			if (ifKeyDown) {
+				var x = e.clientX;//鼠标x坐标
+				console.log(x);
+
+				// if (contact == 'topcenter') {
+				// 	console.log('topcenter');
+				// } else if (contact == 'bottomcenter') {
+				// 	console.log('bottomcenter');
+				// }
+			}
+		};
+	</script>
+</head>
+<body>
+	<div id="box">
+		<div class="topcenter"></div>
+		<div class="bottomcenter"></div>
+	</div>
+	<div class="clip">
+		<img src="img/2.jpg">
+	</div>
+</body>
+</html>

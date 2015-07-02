@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding: 0;
+		}
+
+		.nav{
+			list-style: none;
+			margin: 0;
+			padding: 0 auto;
+			font-size: 12px;
+			font-weight: bold;
+			overflow: auto;/*为了让ul里面的子元素能正常在ul里面显示，这个是必须的*/
+			border-bottom: 2px solid #DC4E1B;
+		}
+
+		.nav li{
+			float: left;
+			margin-right: 1px;
+			background: gray;
+			width: 80px;
+			height: 20px;
+			line-height: 20px;
+		}
+
+		.nav li a{
+			display: block;
+			text-align: center;
+			text-decoration: none;
+			color: #666666;
+			background: #DDD;
+		}
+
+		.nav li a span{
+			display: none;
+		}
+
+		.nav li a:hover span{
+			display: block;
+			color: white;
+			background: #DC4E1B;
+		}
+
+		.nav li a:hover{
+			margin-top: -20px;
+		}
+
+	</style>
+</head>
+<body>
+	<div>
+		<ul class="nav">
+			<li><a href="#">首页<span>Home</span></a></li>
+			<li><a href="#">课程大厅<span>Course</span></a></li>
+			<li><a href="#">学习中心<span>Learn</span></a></li>
+			<li><a href="#">关于我们<span>About</span></a></li>
+		</ul>
+	</div>
+</body>
+</html>
