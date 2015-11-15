@@ -1,0 +1,28 @@
+require.js:http://requirejs.org/
+一、定义模块
+ define 定义模块
+
+model1.js
+define(function{
+   return {a:3};
+})
+
+model2.js
+define(['model1'], function(m1) {//model2一来model1,第一个参数是是一个数组，数组项为模块名，后面函数的参数对应项目的数组项
+   var a,b=2,c=4;
+   a=b*m1.a;
+   return {a:a,b:b};
+})
+
+require:相当于Java中的main
+
+
+main.js
+require(['model2'],function(m2){
+  alert(m2.a*m2.b);
+})
+
+index.html:
+< body>
+	<script src='js/require.js' data-main='js/main'></script>
+</body>
