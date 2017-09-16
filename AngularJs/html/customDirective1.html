@@ -1,0 +1,53 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义指令</title>
+    <script src="../js/angular-1.3.0.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('app', []);
+        app.controller('myCtrl', function ($scope) {
+            $scope.title = '点击展开';
+            $scope.text = '这里是内部内容';
+            $scope.color = 'blue';
+        });
+
+        app.directive('expander', function () {
+            return {
+                restrict: 'EA',
+                transclude: true,
+                replace: true,
+                scope: {
+                    title: '=expanderTitle'
+                },
+                controller: 'myCtrl',
+                template: '<div>'
+                    + '<div ng-click="toggle();" ng-mouseover="tip();" style="background-color: red">{{title}}</div>'
+                    + '<div ng-show="showMe" ng-transclude></div>'
+                    + '</div>',
+                link: function (scope, element, attrs) {
+                    scope.showMe = false;
+                    scope.toggle = function () {
+                        scope.showMe = !scope.showMe;
+                    };
+
+                    scope.tip = function() {
+                        element.attr('title', scope.title + scope.text);
+                    };
+
+                    element.bind('click', function() {
+                        element.css('background-color', scope.color);
+                    })
+                }
+            }
+        })
+    </script>
+</head>
+<body>
+    <div ng-controller="myCtrl">
+        <expander expander-title="title">
+            {{text}}
+        </expander>
+    </div>
+</body>
+</html>

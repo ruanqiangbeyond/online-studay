@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="my.new.module">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			add-book-button {
+				border: 1px solid gray;
+				padding: 2px 5px;
+				border-radius: 3px;
+			}
+		</style>
+		<script type="text/javascript" src="../angular-1.3.0.js"></script>
+		<script type="text/javascript" src="app.js"></script>
+		<script type="text/javascript" src="bookService.js"></script>
+		<script type="text/javascript" src="bookDirective.js"></script>
+		<script type="text/javascript" src="bookController.js"></script>
+	</head>
+	<body ng-controller="books.list">
+		<add-book-button>addbook</add-book-button><br />
+		
+		
+		book list:
+		<div ng-repeat="book in books">title: {{book.title}} ----author: {{book.author}}</div>
+	</body>
+</html>

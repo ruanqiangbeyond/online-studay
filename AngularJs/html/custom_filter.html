@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Binding function on the scope</title>
+		<script src="../js/angular-1.3.0.js"></script>
+		<script type="text/javascript">
+			var app = angular.module('app', []);
+			app.controller('ctrl', function($scope) {
+				$scope.setMeet = function() {
+					$scope.meet = $scope.meeting.message;
+				}
+			})
+			
+			//首字母大写，过滤器
+			app.filter('capitalize', function() {
+			    return function(input, param) {
+			    	if (angular.isDefined(input)) {
+			    		return input.substring(0,1).toUpperCase()+input.substring(1);
+			    	}
+			    	else {
+			    		return undefined;
+			    	}
+			    }
+			});
+		</script>
+	</head>
+	<body ng-app="app" ng-controller="ctrl">
+		<input type="text" ng-model="meeting.message"/>
+		<button ng-click="setMeet()">click here</button>
+		<div ng-show="meet != null && meet != undefined">
+			hello, {{meet | capitalize}}
+		</div>
+	</body>
+</html>

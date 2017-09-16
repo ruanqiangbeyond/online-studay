@@ -1,0 +1,156 @@
+angularjs 指令的属性绑定方式有三种表示方式：@ ，=，&
+
+
+angularjs 指令的属性绑定方式有三种表示方式：@ ，=，&
+
+1：先说指令域scope的@
+
+    我觉得描述很费劲，直接用代码来阐述：
+
+<!doctype html>  
+<html ng-app='myApp'>   
+ <head>     
+  
+ </head>   
+ <body>       
+    
+ <div ng-controller="listCtrl">     
+    <input type="text"  ng-model="t" />  
+     <kid title="{{t}}" >  //这个必须指定的，这里的title是指令里scope的@对应的，t就是控制域scope下的  
+        <span>我的angularjs</span>  
+    </kid>  
+</div>   
+<script type="text/javascript" src="angular.js"></script>  
+<script type="text/javascript" src="main05.js"></script>  
+</body></html>  
+   main05.js
+ 
+
+var myApp=angular.module('myApp',[]);  
+myApp.controller('listCtrl',function($scope){  
+   $scope.logchore="motorola";  
+});  
+  
+  
+myApp.directive('kid',function(){  
+    return {  
+        'restrict':'E',  
+        scope:{  
+            title:"@"  
+        },  
+        template:'<div >{{title}}</div>'  
+          
+    }  
+});  
+在输入框输入数字会绑定到指令模板的title中。
+ 
+
+2：再说说Scope的 =
+
+<!doctype html>  
+<html ng-app='myApp'>   
+ <head>     
+  
+ </head>   
+ <body>       
+    
+ <div ng-controller="listCtrl">     
+    <input type="text"  ng-model="t" />  
+     <kid title="t" > //和上面相比，这个直接赋值等于scope域下的t了  
+        <p>{{title}}</p>  
+        <span>我的angularjs</span>  
+    </kid>  
+</div>   
+<script type="text/javascript" src="angular.js"></script>  
+<script type="text/javascript" src="main05.js"></script>  
+</body></html>  
+main05.js代码如下：
+
+var myApp=angular.module('myApp',[]);  
+myApp.controller('listCtrl',function($scope){  
+   $scope.logchore="motorola";  
+});  
+  
+  
+myApp.directive('kid',function(){  
+    return {  
+        'restrict':'E',  
+        scope:{  
+            title:"="  
+        },  
+        template:'<div >{{title}}</div>'  
+          
+    }  
+});  
+3：最后说&，这个是用来方法调用的
+
+<!doctype html>  
+<html ng-app='myApp'>   
+ <head>     
+  
+ </head>   
+ <body>       
+    
+ <div ng-controller="listCtrl">     
+      <kid flavor="logchore()" ></kid> //先比=，函数赋值的形式，而logchore函数必须是域scope下声明的函数  
+</div>   
+<script type="text/javascript" src="angular.js"></script>  
+<script type="text/javascript" src="main05.js"></script>  
+</body></html> 
+main05.js代码如下：
+
+var myApp=angular.module('myApp',[]);  
+myApp.controller('listCtrl',function($scope){  
+   $scope.logchore=function(){  
+        alert('ok');  
+   };  
+});  
+  
+  
+myApp.directive('kid',function(){  
+    return {  
+        'restrict':'E',  
+        scope:{  
+            flavor:"&"    
+        },  
+        template:'<div ><button ng-click="flavor()"></button></div>'  
+          
+    }  
+});  
+如果logchore带有参数，
+
+<!doctype html>  
+<html ng-app='myApp'>   
+ <head>     
+  
+ </head>   
+ <body>       
+    
+ <div ng-controller="listCtrl">     
+  
+      <kid flavor="logchore(t)" ></kid>   
+  
+</div>   
+<script type="text/javascript" src="angular.js"></script>  
+<script type="text/javascript" src="main05.js"></script>  
+</body></html> 
+main05.js代码如下：
+
+var myApp=angular.module('myApp',[]);  
+myApp.controller('listCtrl',function($scope){  
+   $scope.logchore=function(x){  
+        alert(x);  
+   };  
+});  
+  
+  
+myApp.directive('kid',function(){  
+    return {  
+        'restrict':'E',  
+        scope:{  
+            flavor:"&"  
+        },  
+        template:'<div >    <input type="text"  ng-model="v" /> <button ng-click="flavor({t:v})"></button></div>'  
+          
+    }  
+}); 

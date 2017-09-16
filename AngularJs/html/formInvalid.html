@@ -1,0 +1,24 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>form表单的disabled使用</title>
+    <script src="../js/angular-1.3.0.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('app', []);
+        app.controller('myCtl', function($scope) {
+            $scope.save = function() {
+                alert($scope.user.username)
+            }
+        });
+    </script>
+</head>
+<body>
+<form name="myForm" ng-submit="save();" ng-controller="myCtl">
+    <input type="text" name="username" ng-model="user.username" required/>
+    <div ng-show="myForm.username.$error.required">the name is not null</div>
+    <input type="password" name="password" ng-model="user.password" required/>
+    <input type="submit" ng-disabled="myForm.$invalid"/>
+</form>
+</body>
+</html>

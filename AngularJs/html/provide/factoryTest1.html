@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="main">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../../js/angular-1.3.0.js"></script>
+    <script src="../../js/provide/app_factory.js"></script>
+    <script type="text/javascript">
+            var app = angular.module('main', ['appFactoryModule']);
+
+            app.controller('ctrl', ['$scope', 'factoryTest3', function($scope, test3) {
+                  	$scope.title1 = test3.title('aaaaaa');
+                }]);
+    </script>
+
+</head>
+<body>
+    <div ng-controller="ctrl">
+        title: {{title1}}
+    </div>
+</body>
+</html>
